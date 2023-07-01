@@ -1,8 +1,17 @@
 const express = require('express');
+const bodyParser = require('body-parser');
 const fs = require('fs');
 
+const db = require('../StreamO/utils/db');
+require('dotenv').config();
 const app = express();
 
+// import routes
+const authRoutes = require('./routes/auth');
+app.use(bodyParser.json());
+
+// routing
+app.use('/auth', authRoutes);
 app.get('/', (req, res)=>{
     res.sendFile(__dirname + '/index.html');
 });
@@ -26,5 +35,5 @@ const stream = fs.createReadStream(videoPath, { start, end })
 stream.pipe(res)
 })
 
-app.listen(3000);
+app.listen(process.env.PORT);
 

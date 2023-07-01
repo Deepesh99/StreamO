@@ -1,0 +1,6 @@
+# ignore 
+*.txt
+*.mp4
+.env
+node_modules
+/public
