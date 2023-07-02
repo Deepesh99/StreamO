@@ -9,11 +9,9 @@ require('dotenv').config();
 // this function takes username and password from user and checks against databse.
 // if the user exists and password is correct then genereate jwt token
 exports.login = async (req, res) => {
-  const { user, password } = req.body;
-  console.log(typeof(user));
-  console.log(req.body);
+  const { userName, password } = req.body;
   try {
-    const loggeduser = await User.findOne({ username: user });
+    const loggeduser = await User.findOne({ userName });
     
     // this will check password with the password hash stored in databse
     const validUser = await bcrypt.compare(password, loggeduser.password);
