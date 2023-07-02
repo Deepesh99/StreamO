@@ -5,7 +5,7 @@ const User = require('../model/user');
 // const Product = require('../model/product');
 
 // create connection to database
-mongoose.connect('mongodb://localhost:27017/lmpay', {
+mongoose.connect('mongodb://localhost:27017/streamo', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
@@ -22,6 +22,7 @@ db.on('error', () => {
   console.log('Error in mongodb connection');
 });
 
+/*
 // seeder to seed demo user login data into database
 const seedUser = [{
   username: 'mor_2314',
@@ -37,3 +38,4 @@ const seedDB = async () => {
 
 seedDB();
 module.exports = mongoose;
+*/
