@@ -1,7 +1,7 @@
 const fs = require('fs');
 const express = require('express');
 const multer = require('multer');
-const {videoUpload} = require('../controller/video');
+const {videoUpload, videoDownload} = require('../controller/video');
 // const {} = require('../controller/user');
 
 const User = require('../model/user');
@@ -16,7 +16,9 @@ const storage = multer.diskStorage({
 
       const user = await  User.findOne({_id: userid});
       const username = user.userName;
-      const path = './uploads/'+`${username}`+'/'
+    //   dir = __dirname.replaceAll("\\", "/");;
+    //   console.log(dir);
+      const path =  './uploads/'+`${username}`+'/';
       if(!fs.existsSync(path)) {
           fs.mkdirSync(path);
       }
@@ -30,9 +32,9 @@ const storage = multer.diskStorage({
 
 // this function is used to link the storage to function
 const upload = multer({storage});
-
+router.get('/video/:vid', videoDownload);
 router.post('/video/upload', upload.single('video'), videoUpload);
-// router.get('/video', );
+
 // router.get('/', );
 
 module.exports = router;
