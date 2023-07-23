@@ -1,14 +1,25 @@
+const fs = require('fs');
 const express = require('express');
 const multer = require('multer');
 const {videoUpload} = require('../controller/video');
 // const {} = require('../controller/user');
 
+const User = require('../model/user');
+
 const router = express.Router();
 
+// store video in local memory
+// update this to store in cloud storage
 const storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-    
-      const path = './uploads/'+`${req.headers.username}`+'/'
+    destination: async function (req, file, cb) {
+      const userid = req.headers.userid;
+
+      const user = await  User.findOne({_id: userid});
+      const username = user.userName;
+      const path = './uploads/'+`${username}`+'/'
+      if(!fs.existsSync(path)) {
+          fs.mkdirSync(path);
+      }
       return cb(null, path);
     },
     filename: function (req, file, cb) {
@@ -17,6 +28,7 @@ const storage = multer.diskStorage({
     }
 })
 
+// this function is used to link the storage to function
 const upload = multer({storage});
 
 router.post('/video/upload', upload.single('video'), videoUpload);

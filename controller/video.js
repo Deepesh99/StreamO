@@ -1,3 +1,5 @@
+const Video = require('../model/video');
+
 exports.videoUpload = async(req, res) => {
     // const { title } = req.body;
     console.log(req.file);
