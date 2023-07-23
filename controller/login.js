@@ -22,8 +22,9 @@ exports.login = async (req, res) => {
       const secret = process.env.JWTSECRET;
 
       // token will have userid and expire in 7days
-      const token = jwt.sign({ userid: loggeduser._id }, secret, { expiresIn: '7 days' });
-      return res.status(200).json({ status: true, message: 'Login Success!!', token });
+      const userid = loggeduser._id;
+      const token = jwt.sign({ userid }, secret, { expiresIn: '7 days' });
+      return res.status(200).json({ status: true, message: 'Login Success!!', userid, token });
     }
 
     return res.status(401).json({ status: false, message: 'Username or Password is incorrect' });
