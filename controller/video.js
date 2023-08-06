@@ -1,4 +1,5 @@
 const Video = require('../model/video');
+const fs = require('fs');
 
 // this function uploads video to local db and stores metadata to db
 // toadd: more metadata to help search,
@@ -29,5 +30,6 @@ exports.videoDownload = async(req, res) => {
     }
     catch(err) {
         console.log(err);
+        res.send(err);
     }
 }

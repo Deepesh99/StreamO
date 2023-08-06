@@ -6,6 +6,12 @@ const db = require('../StreamO/utils/db');
 require('dotenv').config();
 const app = express();
 
+app.use((req, res, next) => {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE');
+    res.setHeader('Access-Control-Allow-Headers', '*');
+    next();
+});
 // import routes
 const authRoutes = require('./routes/auth');
 const generalRoutes = require('./routes/general');
