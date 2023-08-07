@@ -1,3 +1,4 @@
+require('dotenv').config();
 const bcrypt = require('bcrypt');
 const User = require('../model/user');
 const nodemailer = require('nodemailer');
@@ -15,8 +16,8 @@ exports.register = async (req, res) => {
         port: 465,
         secure: true,
         auth: {
-            user: 'deepesh99.nair@gmail.com',
-            pass: 'npawxdisbcvuhzbp'
+            user: process.env.SMTP_USER,
+            pass: process.env.SMTP_PASS
         }
       }
       let transporter = nodemailer.createTransport(config);
