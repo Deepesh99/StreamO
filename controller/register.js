@@ -2,7 +2,6 @@ require('dotenv').config();
 const bcrypt = require('bcrypt');
 const User = require('../model/user');
 const nodemailer = require('nodemailer');
-const xoauth2 = require('xoauth2');
 
 exports.register = async (req, res) => {
   const { name, userName, email, password  } = req.body;

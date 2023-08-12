@@ -20,7 +20,6 @@ exports.videoUpload = async(req, res) => {
 // this function will return the path of video to fronted(local path in this case)
 // requires to give video._id from while calling assuming to be called from fronted
 exports.videoDownload = async(req, res) => {
-    console.log("hi");
     const { vid } = req.params;
     console.log(__dirname);
     try {
@@ -32,4 +31,17 @@ exports.videoDownload = async(req, res) => {
         console.log(err);
         res.send(err);
     }
+}
+
+exports.videoSearch = async(req, res) => {
+    let title = req.query.key;
+    let page = (parseInt(req.query.page) ? parseInt(req.query.page) : 1);
+    let limit = (parseInt(req.query.limit) ? parseInt(req.query.limit) : 10);
+    console.log(page, limit);
+    if(title === undefined || title === "") {
+        return res.status(200).send("No result found!!");
+    }
+    let videoList = await Video.find({ title: { $regex: title, $options: 'i' } })
+    console.log(videoList);
+    res.send("VIdeo search resulkts here");
 }

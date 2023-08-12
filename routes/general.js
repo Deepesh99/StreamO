@@ -1,7 +1,7 @@
 const fs = require('fs');
 const express = require('express');
 const multer = require('multer');
-const {videoUpload, videoDownload} = require('../controller/video');
+const {videoUpload, videoDownload, videoSearch} = require('../controller/video');
 // const {} = require('../controller/user');
 
 const User = require('../model/user');
@@ -34,7 +34,7 @@ const storage = multer.diskStorage({
 const upload = multer({storage});
 router.get('/video/:vid', videoDownload);
 router.post('/video/upload', upload.single('video'), videoUpload);
-
+router.get('/search', videoSearch);
 // router.get('/', );
 
 module.exports = router;
