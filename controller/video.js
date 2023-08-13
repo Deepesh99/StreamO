@@ -34,14 +34,18 @@ exports.videoDownload = async(req, res) => {
 }
 
 exports.videoSearch = async(req, res) => {
-    let title = req.query.key;
-    let page = (parseInt(req.query.page) ? parseInt(req.query.page) : 1);
-    let limit = (parseInt(req.query.limit) ? parseInt(req.query.limit) : 10);
-    console.log(page, limit);
+    try {
+        const title = req.query.key;
+    const page = (parseInt(req.query.page) ? parseInt(req.query.page) : 1);
+    const limit = (parseInt(req.query.limit) ? parseInt(req.query.limit) : 10);
+   
     if(title === undefined || title === "") {
         return res.status(200).send("No result found!!");
     }
-    let videoList = await Video.find({ title: { $regex: title, $options: 'i' } })
-    console.log(videoList);
-    res.send("VIdeo search resulkts here");
+    const videoList = await Video.find({ title: { $regex: title, $options: 'i' } }).skip(page-1).limit(limit);
+    
+    res.status(200).json(videoList);
+ } catch(err) {
+     res.status(500).json({ status: true, message: 'Server Error' });
+ }
 }

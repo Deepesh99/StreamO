@@ -13,7 +13,7 @@ const router = express.Router();
 const storage = multer.diskStorage({
     destination: async function (req, file, cb) {
       const userid = req.headers.userid;
-
+      console.log(userid);
       const user = await  User.findOne({_id: userid});
       const username = user.userName;
     //   dir = __dirname.replaceAll("\\", "/");;
