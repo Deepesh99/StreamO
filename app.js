@@ -3,7 +3,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const fs = require('fs');
 
-const db = require('../StreamO/utils/db');
+const db = require('./config/db');
 const app = express();
 
 app.use(bodyParser.json());
