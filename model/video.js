@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const Schema = mongoose.Schema;
+const { Schema } = mongoose.Schema;
 
 // user schema
 const videoSchema = new Schema({
@@ -14,7 +14,7 @@ const videoSchema = new Schema({
   },
   userid: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'user'
+    ref: 'user',
   },
 });
 
