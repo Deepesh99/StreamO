@@ -1,16 +1,14 @@
 const mongoose = require('mongoose');
 
-const { Schema } = mongoose.Schema;
+const { Schema } = mongoose;
 
 // user schema
 const userSchema = new Schema({
-  name: {
+  description: {
     type: String,
-    required: true,
   },
-  userName: {
-    type: String,
-    required: true,
+  doj: {
+    type: Date,
   },
   email: {
     type: String,
@@ -19,9 +17,23 @@ const userSchema = new Schema({
     unique: true,
     required: 'Email address is required',
   },
+  name: {
+    type: String,
+    required: true,
+  },
   password: {
     type: String,
     required: true,
+  },
+  subscribers: {
+    type: Number,
+  },
+  userName: {
+    type: String,
+    required: true,
+  },
+  videos: {
+    type: Number,
   },
 });
 

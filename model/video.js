@@ -1,12 +1,21 @@
 const mongoose = require('mongoose');
 
-const { Schema } = mongoose.Schema;
+const { Schema } = mongoose;
 
 // user schema
 const videoSchema = new Schema({
+  description: {
+    //
+  },
+  likes: {
+    //
+  },
   title: {
     type: String,
     required: true,
+  },
+  uploadDate: {
+    //
   },
   url: {
     type: String,
@@ -15,6 +24,9 @@ const videoSchema = new Schema({
   userid: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'user',
+  },
+  views: {
+    //
   },
 });
 
